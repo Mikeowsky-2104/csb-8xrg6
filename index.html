@@ -1,0 +1,113 @@
+<DOCTYPE html>
+  <head>
+    <title>
+      Hyper Text
+    </title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <br />
+    <div id="post">
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#btn").click(function (e) {
+                    var jsonData = {};
+
+                    var formData = $("#myform").serializeArray();
+                    // console.log(formData);
+
+                    $.each(formData, function () {
+                        if (jsonData[this.name]) {
+                            if (!jsonData[this.name].push) {
+                                jsonData[this.name] = [jsonData[this.name]];
+                            }
+                            jsonData[this.name].push(this.value || '');
+                        } else {
+                            jsonData[this.name] = this.value || '';
+                        }
+
+
+                    });
+                    console.log(jsonData);
+                    $.ajax(
+                        {
+                            url: "D:\Programming\M.A. Progarmms Website\order.json",
+                            type: "POST",
+                            data: jsonData,
+
+                        });
+                    e.preventDefault();
+                });
+            });
+        </script>
+
+    <body>
+    
+        <form id="myform" type="post">
+            <fieldset>
+                <h1>Hyper Text</h1>
+                <div class="elements">
+                    <label for="name">Text Title:</label>
+                    <input required="required" type="text" placeholder="Title" name="title" size="20" />
+                </div>
+                <div class="elements">
+                    <label for="Age">Auther:</label>
+                    <input required="required" type="text" placeholder="Mikhail Azarov" name="name" size="20" />
+                </div>
+                <div class="elements">
+                    <label for="hobby">Text:</label>
+                    <textarea required="required" type="text" placeholder="Some Text" name="text" size="20" ></textarea>
+                </div>
+                <div class="submit">
+                    <input OnClick="save_data()" type="submit" id="btn" name="btn" class="btn" value="Post" />
+                </div>
+            </fieldset>
+        </form>
+    </body>
+</body>
+
+        <script type="text/javascript">
+            function save_data(){
+                var first_name = document.getElementsByName("title")[0].value;
+                var last_name = document.getElementsByName("name")[0].value;
+                var email = document.getElementsByName("text")[0].value;
+
+                data = {'title': first_name, 'auther': last_name, 'text': email};
+
+                var previous_info = JSON.parse(localStorage.getItem('info'));
+
+                if (previous_info == undefined){
+                    previous_info = [];
+                }
+
+                previous_info.push(data);
+
+                localStorage.setItem('info', JSON.stringify(previous_info));
+            }
+
+            function display(){
+                var info = JSON.parse(localStorage.getItem('info'));
+                if (info != null){
+                    
+                    for (var key in info) {
+                        var newDiv = document.createElement("div");
+                        newDiv.innerHTML = "<h7>" + "-----------<br>" + info[key]['title'] + "<br>" + info[key]['auther'] + "<br>" + info[key]['text'] +"</h7>";
+
+                        my_div = document.getElementById("contact");
+                        document.body.insertBefore(newDiv, my_div);
+                    }
+                }
+
+            }
+
+            function delete_all_data(){
+                localStorage.clear();
+            }
+
+            display();
+
+        </script>
+    </div>
+  </body>
+
