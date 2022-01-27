@@ -14,10 +14,14 @@
         textarea{
             width: 500px;
             height: 300px;
+            text-align: center;
+            display: flex;
+            justify-content: center; 
         }
         h1{
             text-align: center;
         }
+
 
         </style>
   </head>
@@ -68,17 +72,17 @@
                     <input required="required" type="text" placeholder="Title" name="title" size="20" />
                 </div>
                 <div class="elements">
-                    <label for="Age">Auther:</label>
+                    <label for="Age">Author:</label>
                     <input required="required" type="text" placeholder="Mikhail Azarov" name="name" size="20" />
                 </div>
                 <div class="elements">
-                    <label for="hobby">Text:</label><br>
                     <textarea required="required" type="text" placeholder="Some Text" name="text" size="20" ></textarea>
                 </div>
                 <div class="submit">
                     <input  OnClick="save_data()" type="submit" id="btn" name="btn" class="btn" value="Save" />
                 </div>
                 <button onClick="window.location.reload();">Display Saved Text</button>
+                <button onClick="delete_all_data()">Delete All Texts</button>
             </fieldset>
         </form>
     </body>
